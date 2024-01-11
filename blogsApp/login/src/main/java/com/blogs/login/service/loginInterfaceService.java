@@ -11,7 +11,7 @@ public interface loginInterfaceService {
 
     public List<loginModel> searchLogin();
 
-    public loginModel addLogin(loginModel model);
+    public loginModel addRegister(loginModel model);
 
     public Map<String, String> getToken(loginModel model);
 }

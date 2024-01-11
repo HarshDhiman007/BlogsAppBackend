@@ -24,11 +24,19 @@ public class loginController {
     @PostMapping("/register")
     public ResponseEntity<?> getALlLogin(@RequestBody loginModel model)
     {
-        return new ResponseEntity<>(service.addLogin(model), HttpStatus.OK);
+        return new ResponseEntity<>(service.addRegister(model), HttpStatus.OK);
     }
     @PostMapping ("/login")
     public ResponseEntity<?> login(@RequestBody loginModel model)
     {
+        String temp=service.getToken(model).get("error");
+        if(temp!=null)
+        {
+            if(temp.equals("one"))
+            {
+                return new ResponseEntity<>("Password entered is incorrent",HttpStatus.BAD_REQUEST);
+            }
+        }
         return new ResponseEntity(service.getToken(model), HttpStatus.OK);
     }
 }

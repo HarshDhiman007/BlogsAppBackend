@@ -1,6 +1,6 @@
 package com.blogs.dashboard;
 
-import com.blogs.dashboard.Filter.filter;
+import com.blogs.dashboard.Filter.gatewayfilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -16,7 +16,7 @@ public class DashboardApplication {
 	public FilterRegistrationBean getFilter() {
 
 		FilterRegistrationBean filterReg= new FilterRegistrationBean();
-		filterReg.setFilter(new filter());
+		filterReg.setFilter(new gatewayfilter());
 		filterReg.addUrlPatterns("/addBlogs");
 		return filterReg;
 	}

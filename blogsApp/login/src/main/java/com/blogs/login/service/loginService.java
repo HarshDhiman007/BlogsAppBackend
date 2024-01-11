@@ -5,6 +5,7 @@ import com.blogs.login.repository.loginRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -16,14 +17,18 @@ import java.util.Map;
 public class loginService implements loginInterfaceService{
     @Autowired
     loginRepository repo;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Override
     public List<loginModel> searchLogin() {
         return repo.findAll();
     }
 
     @Override
-    public loginModel addLogin(loginModel model) {
+    public loginModel addRegister(loginModel model) {
+        model.setPassword(passwordEncoder.encode(model.getPassword()));
         return repo.save(model);
+
     }
 
     public Map<String, String> getToken(loginModel model)
@@ -33,7 +38,15 @@ public class loginService implements loginInterfaceService{
                 .signWith(SignatureAlgorithm.HS256, "itckey")
                 .compact();
 
+        loginModel modell =repo.findByUsername(model.getUsername());
+        String temp=modell.getPassword();
         Map<String, String> jToken= new HashMap<String ,String>();
+        boolean tempp=passwordEncoder.matches(model.getPassword(),modell.getPassword());
+        if(!tempp)
+        {
+            String demp="one";
+            jToken.put("error",demp);
+        }
         jToken.put("token", jwtToken);
         return jToken;
     }
