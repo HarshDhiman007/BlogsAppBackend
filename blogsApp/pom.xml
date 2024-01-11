@@ -12,6 +12,8 @@
     <modules>
         <module>login</module>
         <module>dashboard</module>
+        <module>serverEureka</module>
+        <module>gateWayMod</module>
     </modules>
     <groupId>org.example</groupId>
     <artifactId>blogsApp</artifactId>
