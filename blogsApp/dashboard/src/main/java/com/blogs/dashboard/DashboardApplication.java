@@ -18,6 +18,8 @@ public class DashboardApplication {
 		filterReg.setFilter(new filter());
 		filterReg.addUrlPatterns("/dashboard/addBlogs");
 		filterReg.addUrlPatterns("/dashboard/showBlogs");
+		filterReg.addUrlPatterns("/dashboard/addComment/{vId}");
+		filterReg.addUrlPatterns("/dashboard/getComments/{vId}");
 		return filterReg;
 	}
 }
