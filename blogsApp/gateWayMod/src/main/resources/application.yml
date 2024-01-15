@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: harsh-api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: harsh-login
+          uri: lb://harsh-login
+          predicates:
+          - Path=/auth/**
+        - id: harsh-dashboard
+          uri: lb://harsh-dashboard
+          predicates:
+          - Path=/dashboard/**
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+          corsConfigurations:
+            '[/**]':
+              allowedOrigins: "*"
+              allowedMethods: "*"
+              allowedHeaders: "*"
+server:
+  port: 9093
+eureka:
+  instance:
+    hostname: localhost

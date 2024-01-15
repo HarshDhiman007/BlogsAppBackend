@@ -10,20 +10,18 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin
 public class loginController {
     @Autowired
     loginService service;
-    @CrossOrigin(allowedHeaders = "*",origins = "http://localhost:4200")
     @GetMapping("/getAll")
     public ResponseEntity<?> getALlLogin()
     {
         return new ResponseEntity<>(service.searchLogin(), HttpStatus.OK);
     }
-    @CrossOrigin(allowedHeaders = "*",origins = "http://localhost:4200")
     @PostMapping("/register")
     public ResponseEntity<?> getALlLogin(@RequestBody loginModel model)
     {
+        System.out.println("controller called");
         return new ResponseEntity<>(service.addRegister(model), HttpStatus.OK);
     }
     @PostMapping ("/login")

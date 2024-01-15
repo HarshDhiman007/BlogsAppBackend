@@ -26,6 +26,7 @@ public class dashboardController
     {
         return new ResponseEntity<>(service.addBlog(model), HttpStatus.CREATED);
     }
+    @CrossOrigin(allowedHeaders ="*",origins="http://localhost:4200")
     @GetMapping("/showBlogs")
     public ResponseEntity<?> shoB()
     {
