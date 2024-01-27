@@ -21,7 +21,7 @@ spring:
               allowedMethods: "*"
               allowedHeaders: "*"
 server:
-  port: 9093
+  port: 9094
 eureka:
   instance:
     hostname: localhost

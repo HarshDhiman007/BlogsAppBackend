@@ -25,28 +25,11 @@ public class dashboardController
     dashboardService service;
     @Value("${project.image}")
     private String path;
-    @PostMapping("/addBlogs")
-    public ResponseEntity<?> addB(@RequestBody  dashboardModel model)
-    {
-        return new ResponseEntity<>(service.addBlog(model), HttpStatus.CREATED);
-    }
     @CrossOrigin(allowedHeaders ="*",origins="http://localhost:4200")
     @GetMapping("/showBlogs")
     public ResponseEntity<?> shoB()
     {
         return new ResponseEntity<>(service.showBlogs(), HttpStatus.OK);
-    }
-    @PostMapping("/upload")
-    public ResponseEntity<tempResponse> fileUpload(@RequestParam("image") MultipartFile image) {
-        String fileName=null;
-        try{
-            fileName=this.service.uploadImage(path,image);
-        }catch(IOException e)
-        {
-            e.printStackTrace();
-            return new ResponseEntity<>(new tempResponse(null,"Image is not uploaded"),HttpStatus.CONFLICT);
-        }
-        return new ResponseEntity<>(new tempResponse(fileName,"Image is successfully uploaded"),HttpStatus.OK);
     }
     @PostMapping("/addComment/{vId}")
     public ResponseEntity<?> addC(@RequestBody comment com,@PathVariable int vId)
@@ -62,20 +45,20 @@ public class dashboardController
     @Autowired
     private ObjectMapper mapp;
     @PostMapping("/putBlogs")
-    public ResponseEntity<?> putBlog(@RequestParam("image")MultipartFile file,@RequestParam("blogData")String blogData){
+    public ResponseEntity<?> putBlog(@RequestParam("file")MultipartFile file,@RequestParam("blogData")String blogData){
         this.logger.info("add blog request");
+        String fileName=null;
         logger.info("file information {}",file.getOriginalFilename());
         logger.info("blog : {}",blogData);
         dashboardModel model=null;
         try{
+            fileName=this.service.uploadImage(path,file);
             model=mapp.readValue(blogData,dashboardModel.class);
-            return new ResponseEntity<>(model,HttpStatus.OK);
+            return new ResponseEntity<>(service.addBlog(model), HttpStatus.CREATED);
         }
-        catch(Exception e)
-        {
+        catch(Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request");
         }
-
 
     }
 }

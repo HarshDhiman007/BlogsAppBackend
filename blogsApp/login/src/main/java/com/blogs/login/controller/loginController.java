@@ -32,7 +32,7 @@ public class loginController {
         {
             if(temp.equals("one"))
             {
-                return new ResponseEntity<>("Password entered is incorrent",HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("Password entered is incorrect",HttpStatus.BAD_REQUEST);
             }
         }
         return new ResponseEntity(service.getToken(model), HttpStatus.OK);
