@@ -4,17 +4,21 @@ import com.blogs.dashboard.model.comment;
 import com.blogs.dashboard.model.dashboardModel;
 import com.blogs.dashboard.model.tempResponse;
 import com.blogs.dashboard.service.dashboardService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 
 @RestController
 @RequestMapping("/dashboard")
+@CrossOrigin("*")
 public class dashboardController
 {
     @Autowired
@@ -53,5 +57,25 @@ public class dashboardController
     public ResponseEntity<?> showC(@PathVariable int vId)
     {
         return new ResponseEntity<>(service.showCom(vId),HttpStatus.OK);
+    }
+    private Logger logger= LoggerFactory.getLogger(dashboardController.class);
+    @Autowired
+    private ObjectMapper mapp;
+    @PostMapping("/putBlogs")
+    public ResponseEntity<?> putBlog(@RequestParam("image")MultipartFile file,@RequestParam("blogData")String blogData){
+        this.logger.info("add blog request");
+        logger.info("file information {}",file.getOriginalFilename());
+        logger.info("blog : {}",blogData);
+        dashboardModel model=null;
+        try{
+            model=mapp.readValue(blogData,dashboardModel.class);
+            return new ResponseEntity<>(model,HttpStatus.OK);
+        }
+        catch(Exception e)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request");
+        }
+
+
     }
 }

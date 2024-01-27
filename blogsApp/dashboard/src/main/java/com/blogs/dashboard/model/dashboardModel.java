@@ -13,14 +13,53 @@ public class dashboardModel {
    private String title;
    private String content;
    private String dob;
+   private String imgName;
 
-   public dashboardModel(int id, String author, String description, String title, String content, String dob) {
+   public dashboardModel() {
+      super();
+   }
+
+   @Override
+   public int hashCode() {
+      return super.hashCode();
+   }
+
+   @Override
+   public boolean equals(Object obj) {
+      return super.equals(obj);
+   }
+
+   @Override
+   protected Object clone() throws CloneNotSupportedException {
+      return super.clone();
+   }
+
+   @Override
+   protected void finalize() throws Throwable {
+      super.finalize();
+   }
+
+   public dashboardModel(int id, String author, String description, String title, String content, String dob, String imgName) {
       this.id = id;
       this.author = author;
       this.description = description;
       this.title = title;
       this.content = content;
       this.dob = dob;
+      this.imgName = imgName;
+   }
+
+   @Override
+   public String toString() {
+      return "dashboardModel{" +
+              "id=" + id +
+              ", author='" + author + '\'' +
+              ", description='" + description + '\'' +
+              ", title='" + title + '\'' +
+              ", content='" + content + '\'' +
+              ", dob='" + dob + '\'' +
+              ", imgName='" + imgName + '\'' +
+              '}';
    }
 
    public int getId() {
@@ -71,4 +110,11 @@ public class dashboardModel {
       this.dob = dob;
    }
 
+   public String getImgName() {
+      return imgName;
+   }
+
+   public void setImgName(String imgName) {
+      this.imgName = imgName;
+   }
 }
