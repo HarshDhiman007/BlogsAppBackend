@@ -20,10 +20,12 @@ import java.util.UUID;
 public class dashboardService implements dashboardServiceInterface {
     @Autowired
     dashboardRepository repo;
+    public String fileName;
     @Autowired
     commentRepo cRepo;
     @Override
     public dashboardModel addBlog(dashboardModel model) {
+        model.setImgName(fileName);
         return repo.save(model);
     }
 
@@ -36,7 +38,7 @@ public class dashboardService implements dashboardServiceInterface {
     public String uploadImage(String path, MultipartFile file) throws IOException {
         String name=file.getOriginalFilename();
         String randomId= UUID.randomUUID().toString();
-        String fileName=randomId.concat(name.substring(name.lastIndexOf(".")));
+        fileName=randomId.concat(name.substring(name.lastIndexOf(".")));
         String filePath=path+ File.separator+fileName;
         File filee=new File(path);
         if(!filee.exists())

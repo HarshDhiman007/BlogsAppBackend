@@ -46,10 +46,7 @@ public class dashboardController
     private ObjectMapper mapp;
     @PostMapping("/putBlogs")
     public ResponseEntity<?> putBlog(@RequestParam("file")MultipartFile file,@RequestParam("blogData")String blogData){
-        this.logger.info("add blog request");
         String fileName=null;
-        logger.info("file information {}",file.getOriginalFilename());
-        logger.info("blog : {}",blogData);
         dashboardModel model=null;
         try{
             fileName=this.service.uploadImage(path,file);
