@@ -14,22 +14,12 @@ public class LoginApplication {
 		SpringApplication.run(LoginApplication.class, args);
 		System.out.println("Running Login/Register Microservice");
 	}
-	@Bean
-	public FilterRegistrationBean getFilter(){
-		FilterRegistrationBean filterReg= new FilterRegistrationBean();
-		filterReg.setFilter(new filter());
-		filterReg.addUrlPatterns("/auth/getAll");
-		return filterReg;
-	}
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
-			}
-		};
-	}
+//	@Bean
+//	public FilterRegistrationBean getFilter(){
+//		FilterRegistrationBean filterReg= new FilterRegistrationBean();
+//		filterReg.setFilter(new filter());
+////		filterReg.addUrlPatterns("/auth/getAll");
+//		return filterReg;
+//	}
 
 }

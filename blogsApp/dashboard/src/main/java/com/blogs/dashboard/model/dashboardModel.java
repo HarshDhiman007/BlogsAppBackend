@@ -7,7 +7,7 @@ import java.util.List;
 @Document
 public class dashboardModel {
    @Id
-   private int id;
+   private String id;
    private String author;
    private String description;
    private String title;
@@ -39,7 +39,7 @@ public class dashboardModel {
       super.finalize();
    }
 
-   public dashboardModel(int id, String author, String description, String title, String content, String dob, String imgName) {
+   public dashboardModel(String id, String author, String description, String title, String content, String dob, String imgName) {
       this.id = id;
       this.author = author;
       this.description = description;
@@ -62,11 +62,11 @@ public class dashboardModel {
               '}';
    }
 
-   public int getId() {
+   public String getId() {
       return id;
    }
 
-   public void setId(int id) {
+   public void setId(String id) {
       this.id = id;
    }
 

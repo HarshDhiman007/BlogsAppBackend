@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface commentRepo extends MongoRepository<comment,Integer> {
+public interface commentRepo extends MongoRepository<comment,String> {
     @Query("{'vId':?0}")
-    List<comment> findByVId(int vId);
+    List<comment> findByVId(String vId);
 }

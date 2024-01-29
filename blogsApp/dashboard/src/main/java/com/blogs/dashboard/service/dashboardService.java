@@ -50,14 +50,14 @@ public class dashboardService implements dashboardServiceInterface {
     }
 
     @Override
-    public comment addComm(comment com, int vId) {
-        com.setvId(vId);
+    public comment addComm(comment com)
+    {
         cRepo.save(com);
         return com;
     }
 
     @Override
-    public List<comment> showCom(int vId) {
+    public List<comment> showCom(String vId) {
         List<comment> coms =cRepo.findByVId(vId);
         return coms;
     }

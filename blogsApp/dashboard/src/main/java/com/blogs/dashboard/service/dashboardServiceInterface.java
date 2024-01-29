@@ -13,7 +13,7 @@ public interface dashboardServiceInterface {
     public List<dashboardModel> showBlogs();
     String uploadImage(String path , MultipartFile file) throws IOException;
 
-    public comment addComm(comment com, int vId);
+    public comment addComm(comment com);
 
-    public List<comment> showCom(int vId);
+    public List<comment> showCom(String vId);
 }

@@ -24,20 +24,21 @@ public class dashboardController
     @Autowired
     dashboardService service;
     @Value("${project.image}")
-    private String path;
+    private String path="images/";
     @CrossOrigin(allowedHeaders ="*",origins="http://localhost:4200")
     @GetMapping("/showBlogs")
     public ResponseEntity<?> shoB()
     {
         return new ResponseEntity<>(service.showBlogs(), HttpStatus.OK);
     }
-    @PostMapping("/addComment/{vId}")
-    public ResponseEntity<?> addC(@RequestBody comment com,@PathVariable int vId)
+    @PostMapping("/addComment")
+    public ResponseEntity<?> addC(@RequestBody comment com)
     {
-        return new ResponseEntity<>(service.addComm(com,vId),HttpStatus.OK);
+        System.out.println(com);
+        return new ResponseEntity<>(service.addComm(com),HttpStatus.OK);
     }
     @GetMapping("getComments/{vId}")
-    public ResponseEntity<?> showC(@PathVariable int vId)
+    public ResponseEntity<?> showC(@PathVariable String vId)
     {
         return new ResponseEntity<>(service.showCom(vId),HttpStatus.OK);
     }
@@ -51,10 +52,11 @@ public class dashboardController
         try{
             fileName=this.service.uploadImage(path,file);
             model=mapp.readValue(blogData,dashboardModel.class);
+            System.out.println(model);
             return new ResponseEntity<>(service.addBlog(model), HttpStatus.CREATED);
         }
         catch(Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("This is getting into exception");
         }
 
     }

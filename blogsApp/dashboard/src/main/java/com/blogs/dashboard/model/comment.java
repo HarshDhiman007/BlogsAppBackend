@@ -5,9 +5,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class comment {
+    @Id
+    private String commentId;
+    private String vId;
     private String commentUsername;
     private String comment;
-    private int vId;
+
+    public comment(String commentId, String vId, String commentUsername, String comment) {
+        this.commentId = commentId;
+        this.vId = vId;
+        this.commentUsername = commentUsername;
+        this.comment = comment;
+    }
 
     public comment() {
         super();
@@ -38,9 +47,19 @@ public class comment {
         super.finalize();
     }
 
-    public comment(String commentUsername, String comment, int vId) {
-        this.commentUsername = commentUsername;
-        this.comment = comment;
+    public String getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(String commentId) {
+        this.commentId = commentId;
+    }
+
+    public String getvId() {
+        return vId;
+    }
+
+    public void setvId(String vId) {
         this.vId = vId;
     }
 
@@ -58,13 +77,5 @@ public class comment {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public int getvId() {
-        return vId;
-    }
-
-    public void setvId(int vId) {
-        this.vId = vId;
     }
 }
